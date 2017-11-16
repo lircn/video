@@ -26,17 +26,18 @@ static void call_recognize(Mat frame);
 static void push_stream(Mat frame);
 
 static VideoCapture g_vin = VideoCapture(0);
-static CvVideoWriter *g_vout;
+static VideoWriter g_vout;
 
 static int init(void)
 {
     g_vin.set(CV_CAP_PROP_FRAME_WIDTH , DEF_FRAME_WIDTH);
     g_vin.set(CV_CAP_PROP_FRAME_HEIGHT, DEF_FRAME_HEIGHT);
 
-    CvSize size = cvSize(g_vin.get(CV_CAP_PROP_FRAME_WIDTH),
+    Size size = Size(g_vin.get(CV_CAP_PROP_FRAME_WIDTH),
             g_vin.get(CV_CAP_PROP_FRAME_HEIGHT));
     int fourcc = CV_FOURCC('F','L','V','1');
-    g_vout = cvCreateVideoWriter(DEF_OUT_VIDEO_NAME, fourcc,
+    fourcc = -1;
+    g_vout = VideoWriter(DEF_OUT_VIDEO_NAME, fourcc,
             DEF_OUT_VIDEO_FPS, size);
 
     namedWindow(SHOW_WIN_NAME, SHOW_WIN_SIZE);
@@ -95,7 +96,7 @@ static void push_stream(Mat frame)
 {
     static int counter = 0;
 
-    cvWriteFrame(g_vout, frame);
+    g_vout.write(frame);
     counter++;
 
     if (counter > 100) {
