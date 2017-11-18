@@ -7,6 +7,7 @@ import subprocess
 
 
 cfg = {
+    "input_dev" : "/dev/video0",
     "size_w" : 640,
     "size_h" : 480,
 
@@ -61,7 +62,7 @@ class Cap:
 
     def get_cmd(self):
         cmd  = self.get_func()
-        cmd += " -i " + self.get_dev()
+        cmd += " -i %s " % (cfg["input_dev"])
         cmd += " -y -threads 1 -s " + self.get_size()
         cmd += " -lavfi '%s' " % (self.get_cfilter())
 
@@ -78,11 +79,8 @@ class Cap:
         ret = "split %s%s;%sfps=fps=%d%s;%sfps=fps=%d%s" % (v,i,v,int(cfg["video_fps"]),self.label_v,i,int(cfg["image_fps"]),self.label_i)
         return ret
 
-    def get_dev(self):
-        return "/dev/video0"
-
     def get_func(self):
-        return "/usr/bin/ffmpeg"
+        return "ffmpeg"
 
     def get_size(self):
         ret = "%dx%d" % (int(cfg["size_w"]), int(cfg["size_h"]))

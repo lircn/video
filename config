@@ -1,12 +1,14 @@
+
+input_dev=/dev/video0
 size_w=640
 size_h=480
 
-video_fmt="flv"
+video_fmt=flv
 video_fps=12
-video_out="v.flv"
+video_out=v.flv
 #video_out="rtmp://ai.nationz.com.cn:1935/myapp/testav"
 
-image_fmt="image2"
+image_fmt=image2
 image_fps=1
 image_out="/tmp/img/%03d.jpeg"
 
