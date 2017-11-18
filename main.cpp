@@ -64,8 +64,6 @@ static int start_cap(void)
         push_stream(frame);
         show_frame(frame);
     }
-    g_vout.release();
-    g_vin.release();
 
     return OK;
 }
