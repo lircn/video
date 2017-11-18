@@ -101,6 +101,8 @@ if __name__ == '__main__':
     imgp = ImageProcess()
 
     tik = 0
+    # waiting for init
+    time.sleep(3)
     while True:
         time.sleep(1)
         imgp.do()
