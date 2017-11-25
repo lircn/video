@@ -1,6 +1,6 @@
 #!/bin/sh
 
-PROG="cap.pyc"
+PROG="cap.py"
 
 run=`ps ax|grep "$PROG"|grep -v "grep"`
 if [ "$run" ]; then

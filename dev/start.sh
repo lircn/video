@@ -1,8 +1,9 @@
 #!/bin/sh
 
-PROG="cap.pyc"
+PROG="cap.py"
 
 mkdir -p /tmp/img/
+mkdir -p /tmp/info/
 
 run=`ps ax|grep "$PROG"|grep -v "grep"`
 echo $run

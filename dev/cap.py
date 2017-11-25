@@ -4,7 +4,9 @@
 import os
 import time
 import subprocess
+import urllib
 
+g_url = "ai.nationz.com.cn"
 
 cfg = {
     "input_dev" : "/dev/video0",
@@ -91,6 +93,13 @@ class ImageProcess:
         self.fd = subprocess.call(cfg["image_handler"], stdout=None, stderr=None, shell=True)
         return
 
+def pull_info():
+    usr = "bob"
+    url = "http://" + g_url + "/usr_info/" + usr
+    out = "/tmp/info/" + usr
+    urllib.urlretrieve(url, out)
+    return
+
 if __name__ == '__main__':
     config = Config()
     config.load()
@@ -103,9 +112,17 @@ if __name__ == '__main__':
     tik = 0
     # waiting for init
     time.sleep(3)
+
     while True:
         time.sleep(1)
         imgp.do()
+
+        if tik % 60 == 0:
+            pull_info()
+
+        tik += 1
+        if tik == 1000:
+            tik = 0
 
     cap.stop()
     cap.wait()
